@@ -19,8 +19,8 @@ def cli(config, verbose, home_directory):
     config.home_directory = home_directory
 
 @click.command()
-@click.option("--name", default="tout le monde", help="Nom de l'utilisateur")
-@click.option("--repeat", default=1, help="Nombre de message de bienvenue")
+@click.option("--name", "-n", default="tout le monde", help="Nom de l'utilisateur")
+@click.option("--repeat", "-r", default=1, help="Nombre de message de bienvenue")
 @click.argument("out", type=click.File('w'), default='-', required=False)
 @pass_config
 def welcome(config, name, repeat, out):
@@ -28,10 +28,10 @@ def welcome(config, name, repeat, out):
     if config.verbose:
         click.echo("We are in verbose mode")
     
-    click.echo("Home directory is %s" % config.home_directory)
+    click.echo("Home directory is {0}".format(config.home_directory))
     
     for i in range(repeat):
-        click.echo("Bonjour %s !" % name, file=out)
+        click.echo("Bonjour {0} !".format(name), file=out)
         
 @click.command()
 @pass_config
